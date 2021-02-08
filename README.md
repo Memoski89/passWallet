@@ -41,3 +41,45 @@ The following steps are only for _one_ of the group members to perform.
 - Node 10.x or above
 - NPM 5.x or above
 - PG 6.x
+
+
+
+A storage system for passwords for organzations. An organization, like Lighthouse labs, has many different accounts which need to be shared between users. 
+
+If a user needs to log in to a specific website (e.g. Facebook) they can go into the app, find the appropriate password, click a button which copies the password into the clipboard, and log in.
+
+Requirements:
+user can register/login and be assigned to an organization
+an organization has many users
+user can add a new username and password for a specific website
+app can generate passwords based on the criteria specified (password length, contains lowercase, contairs uppercase, contains numbers, etc)
+user can edit and change their password any time
+user has a convinient copy to clipboard button so they dont have to select the password
+sites can be categoried, to, social (fb, linkedin), work related (bamboo, harvest), entertainment (snapchat, reddit), etc, etc
+
+## Determine user stories:
+
+  ## Features
+
+  1 - an administrator can login and see all the usernames and passwords for their organization
+  2 - A user can generate password according site requirements and then can go register on site ((password length, contains lowercase, contairs uppercase, contains numbers, and contains symbols etc. are pw options))
+  3 - OR user can save an existing log in and we will store it
+
+
+
+org table:L
+multiple admins for same org
+
+different admins for different orgs
+
+## routes
+
+		/login --login 
+		/register --register
+		/ -- home
+		/home -- home
+		/home/createNewLogin:user_id 
+		/home/editLogin:user_id
+		/home/deleteLogin:user_id
+		/home/myPasswords:user_id
+		/home/myOrganizationPasswords:id
