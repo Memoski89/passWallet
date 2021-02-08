@@ -58,55 +58,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-//////////////////////////////////////////////////
-
-
-
-// app.get('/home', (req,res) => {
-
-//   res.send("this is home page");
-
-// });
-
-// app.get('/home/createNewLogin:user_id', (req,res) => {
-
-//   res.send("this is home/createNewLogin:user_id ");
-
-
-// });
-
-
-// app.get('/home/editLogin:user_id', (req,res) => {
-
-//   res.send("this is /home/editLogin:user_id ");
-
-// });
-
-// app.get('/home/deleteLogin:user_id', (req,res) => {
-
-//   res.send("this is /home/deleteLogin:user_id ");
-
-
-
-// });
-
-// app.get('/home/myPasswords:user_id', (req,res) => {
-
-//   res.send("this is /home/deleteLogin:user_id ");
-
-
-// });
-
-
-// app.get('/home/myOrganizationPasswords:id', (req,res) => {
-
-//   res.send('/home/myOrganizationPasswords:id')
-
-// });
-
-
-
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
