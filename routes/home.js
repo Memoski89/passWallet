@@ -10,7 +10,7 @@ router.route('/')
 
     res.send("this is home page");
 
-  })
+  });
 
 //get and post route to create new login
 router.route('/createNewLogin:user_id')

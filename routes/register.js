@@ -3,6 +3,9 @@
 let express = require('express');
 //let app = express();
 let router = express.Router();
+const cookieSession = require('cookie-session');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 router.route('/',(req,res) => {
 
