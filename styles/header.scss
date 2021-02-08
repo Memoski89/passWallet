@@ -1,0 +1,29 @@
+header {
+  display: flex;
+  background-color: #97572b;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100px;
+  padding-top: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: black;
+  position: fixed;
+  top: 0;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+
+
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+}
+
+.nav-logo {
+  font-family: "Playfair Display", serif;
+}

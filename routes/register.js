@@ -15,7 +15,7 @@ router.route('/',(req,res) => {
 
   }).get((req,res) => {
 
-    res.send("this is the registration page");
+    res.render("register");
 
   });
 
