@@ -1,0 +1,8 @@
+header{
+  display: flex;
+  background-color: brown;
+  justify-content: space-between;
+  flex-direction: row;
+
+}
+
