@@ -15,25 +15,26 @@ db.connect();
 //get request for /home
 router.route('/')
   .get((req,res) => {
-    const idToStore = req.rows;
+    console.log(req.session)
+    const idToStore = req.session.user_email;
     console.log(idToStore); //why is this undefined??
     // req.session.user_email = idToStore;
     // req.session.user_email = dbres.rows[0].email;
     // console.log(dbres.rows[0].email)
 
     db.query(
-      `SELECT * FROM user_login_per_site WHERE user_name_for_site_login = ${idToStore} ;`)
+      `SELECT * FROM user_login_per_site;`)
       .then(dbres => {
         console.log(dbres); //works, retuns query results
         //res.json(dbres.rows[0].password);
-        const queryResults = (dbres);
+        const queryResults = dbres;
 
         const templateVars =
         { passwords: queryResults,
           idToStore
         };
 
-        res.render('index', templateVars);
+        //res.render('index', templateVars);
 
         //here we rended our saved passwords
         res.render("myaccount",templateVars);
