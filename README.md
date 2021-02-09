@@ -41,3 +41,16 @@ The following steps are only for _one_ of the group members to perform.
 - Node 10.x or above
 - NPM 5.x or above
 - PG 6.x
+
+
+## routes
+
+		/login --login 
+		/register --register
+		/ -- home
+		/home -- home
+		/home/createNewLogin:user_id 
+		/home/editLogin:user_id
+		/home/deleteLogin:user_id
+		/home/myPasswords:user_id
+		/home/myOrganizationPasswords:id
