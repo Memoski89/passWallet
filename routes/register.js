@@ -31,11 +31,9 @@ router.route('/',(req,res) => {
 
      db.query(queryString,values)
       .then(dbres => {
-        console.log('hiii')
         const idToStore = dbres.rows[0].email;
         req.session.user_email = idToStore;
         req.session.user_email = dbres.rows[0].email;
-        console.log(dbres.rows[0].email)
 
         const templateVars =
         { idToStore

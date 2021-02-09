@@ -22,8 +22,7 @@ let router = express.Router();
 
 // console.log(cookieSession)
 router.route('/',(req,res) => {
-
-
+  
   })
   .post((req,res) => {
 
@@ -35,12 +34,4 @@ router.route('/',(req,res) => {
 
   });
 
-
-
-
-
-
-
-
-
-module.exports = router;
+  module.exports = router;

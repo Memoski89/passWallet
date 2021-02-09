@@ -3,24 +3,44 @@
 let express = require('express');
 //let app = express();
 let router = express.Router();
+// const cookieSession = require('cookie-session');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const { Pool } = require('pg');
+const dbParams = require('../lib/db.js');
+const db = new Pool(dbParams);
+db.connect();
+
 
 //get request for /home
 router.route('/')
   .get((req,res) => {
-    const idToStore = res.rows;
-    console.log(idToStore)
+    const idToStore = req.rows;
+    console.log(idToStore); //why is this undefined??
     // req.session.user_email = idToStore;
     // req.session.user_email = dbres.rows[0].email;
     // console.log(dbres.rows[0].email)
 
-    const templateVars =
-    { idToStore
-    };
+    db.query(
+      `SELECT * FROM user_login_per_site WHERE user_name_for_site_login = ${idToStore} ;`)
+      .then(dbres => {
+        console.log(dbres); //works, retuns query results
+        //res.json(dbres.rows[0].password);
+        const queryResults = (dbres);
+
+        const templateVars =
+        { passwords: queryResults,
+          idToStore
+        };
+
+        res.render('index', templateVars);
+
+        //here we rended our saved passwords
+        res.render("myaccount",templateVars);
 
 
+      }).catch(e => res.send('redirect to page that says email/login incorrect',e));
 
-    //here we rended our saved passwords
-    res.render("myaccount",templateVars);
 
   });
 
