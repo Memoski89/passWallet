@@ -46,6 +46,7 @@ const widgetsRoutes = require("./routes/widgets");
 const logins = require("./routes/login");
 const register = require("./routes/register");
 const home = require("./routes/home");
+const logout = require("./routes/logout");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -56,6 +57,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use('/login',logins);
 app.use('/register',register);
 app.use('/home',home);
+app.use('/logout',logout);
 
 // cookiesession to read incoming client cookies and encrypt userID.
 
