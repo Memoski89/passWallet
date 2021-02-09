@@ -54,11 +54,11 @@ router.route('/',(req,res) => {
           res.render('index', templateVars);
 
         }
-      }).catch(e => res.send ('redirect to page that says email/login incorrect'));
+      }).catch(e => res.send('incorrect login'));
 
 
   }).get((req,res) => {
-    console.log('get route')
+    console.log('get route');
     res.render('login');
 
   });
