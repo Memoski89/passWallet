@@ -7,9 +7,20 @@ let router = express.Router();
 //get request for /home
 router.route('/')
   .get((req,res) => {
+    const idToStore = res.rows;
+    console.log(idToStore)
+    // req.session.user_email = idToStore;
+    // req.session.user_email = dbres.rows[0].email;
+    // console.log(dbres.rows[0].email)
+
+    const templateVars =
+    { idToStore
+    };
+
+
 
     //here we rended our saved passwords
-    res.render("myaccount");
+    res.render("myaccount",templateVars);
 
   });
 
