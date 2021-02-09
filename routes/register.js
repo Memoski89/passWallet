@@ -32,16 +32,23 @@ router.route('/',(req,res) => {
      db.query(queryString,values)
       .then(dbres => {
         console.log('hiii')
+        const idToStore = dbres.rows[0].email;
+        req.session.user_email = idToStore;
         req.session.user_email = dbres.rows[0].email;
         console.log(dbres.rows[0].email)
 
-        return res.send('you are registered');
+        const templateVars =
+        { idToStore
+        };
+
+        res.render('index', templateVars);
+
       })
       .catch(err => {
         return console.log('query error:', err);
       });
 
-    res.send('post register post req');
+    //res.send('post register post req');
 
   }).get((req,res) => {
 
