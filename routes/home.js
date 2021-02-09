@@ -21,14 +21,14 @@ router.route('/')
     // req.session.user_email = idToStore;
     // req.session.user_email = dbres.rows[0].email;
     // console.log(dbres.rows[0].email)
-
+    let paramsForQuery = [idToStore];
     db.query(
-      `SELECT * FROM user_login_per_site;`)
+      `SELECT * FROM user_login_per_site WHERE user_name_for_site_login = $1;`,paramsForQuery)
       .then(dbres => {
         console.log(dbres); //works, retuns query results
         //res.json(dbres.rows[0].password);
-        const queryResults = dbres;
-        let templateVars
+        const queryResults = dbres.rows;
+        let templateVars;
         if (req.session.user_email) {
           templateVars =
           { passwords: queryResults,
@@ -65,42 +65,43 @@ router.route('/createNewLogin:user_id')
 
   });
 
-//get and post routes to edit an existing login
+
+//get and post route to edit login
 router.route('/editLogin:user_id')
   .get((req,res) => {
-
-    res.send("this iscreate new edit user ");
+    console.log('hi');
+    res.send("this iscreate new edit userig");
 
   })
   .post((req,res) => {
 
-    res.send("this iscreate new login userig");
+    res.send("this iscreate new edit userig");
 
   });
 
-//delete only has a post route
+//get and post route to edit login
 router.route('/deleteLogin:user_id')
   .post((req,res) => {
 
-    res.send("this iscreate delete user id");
+    res.send("this iscreate delete POST userig");
 
   });
 
 
-//get route for user to view their saved passwords
-router.route('/myPasswords:user_id')
-  .get((req,res) => {
+// //get route for user to view their saved passwords
+// router.route('/myPasswords:user_id')
+//   .get((req,res) => {
 
-    res.send("this iscreate delete user id");
+//     res.send("this iscreate delete user id");
 
-  });
+//   });
 
-//get route for ADMIN to view their organizations saved passwords
-router.route('/myOrganizationPasswords:id')
-  .get((req,res) => {
+// //get route for ADMIN to view their organizations saved passwords
+// router.route('/myOrganizationPasswords:id')
+//   .get((req,res) => {
 
-    res.send("/home/myOrganizationPasswords:id");
+//     res.send("/home/myOrganizationPasswords:id");
 
-  });
+//   });
 
 module.exports = router;
