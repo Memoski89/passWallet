@@ -39,14 +39,21 @@ router.route('/',(req,res) => {
       .then(dbres => {
         console.log('post db query')
         //res.json(dbres.rows[0].password);
-
+        const queryResults = (dbres.rows[0])
         //if email and password match values in database for users.email and password then log in
-        if((dbres.rows[0].email === inputEmail) && (dbres.rows[0].password === inputPassword)  )
-                  {
-                    req.session.user_email = dbres.rows[0].email;
+        if((dbres.rows[0].email === inputEmail) && (dbres.rows[0].password === inputPassword)) {
 
-                    res.send('welcome')
-                  }
+          const idToStore = dbres.rows[0].email;
+          req.session.user_email = idToStore;
+
+          const templateVars =
+          { passwords: queryResults,
+            idToStore
+          };
+
+          res.render('index', templateVars);
+
+        }
       }).catch(e => res.send ('redirect to page that says email/login incorrect'));
 
 

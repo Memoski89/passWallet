@@ -8,7 +8,8 @@ let router = express.Router();
 router.route('/')
   .get((req,res) => {
 
-    res.send("this is home page");
+    //here we rended our saved passwords
+    res.render("myaccount");
 
   });
 

@@ -25,7 +25,7 @@ router.route('/',(req,res) => {
 
 
   })
-  .get((req,res) => {
+  .post((req,res) => {
 
     console.log('logout route')
 
