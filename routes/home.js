@@ -15,7 +15,7 @@ db.connect();
 //get request for /home
 router.route('/')
   .get((req,res) => {
-    console.log(req.session)
+    console.log(req.session);
     const idToStore = req.session.user_email;
     console.log(idToStore); //why is this undefined??
     // req.session.user_email = idToStore;
@@ -28,11 +28,18 @@ router.route('/')
         console.log(dbres); //works, retuns query results
         //res.json(dbres.rows[0].password);
         const queryResults = dbres;
-
-        const templateVars =
-        { passwords: queryResults,
-          idToStore
-        };
+        let templateVars
+        if (req.session.user_email) {
+          templateVars =
+          { passwords: queryResults,
+            idToStore
+          };
+        } else {
+          templateVars =
+          { passwords: queryResults,
+            idToStore: null
+          };
+        }
 
         //res.render('index', templateVars);
 

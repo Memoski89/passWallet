@@ -66,7 +66,21 @@ app.use('/logout',logout);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  console.log(req.session);
+  let templateVars;
+  if (req.session.user_email) {
+    const idToStore = req.session.user_email;
+    templateVars =
+    {
+      idToStore
+    };
+  } else {
+    templateVars =
+    {
+      idToStore: null
+    };
+  }
+  res.render("index", templateVars);
 });
 
 

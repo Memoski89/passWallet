@@ -18,13 +18,12 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   </head>
   <body>
-    <div>
-      <% if(idToStore){ %>
-        <% include partials/_loggedheader %>
-      <% } else { %>
+      <% if(!(idToStore)){ %>
         <% include partials/_header %>
+      <% } else { %>
+        <% include partials/_loggedheader %>
       <% }; %>
-    </div>
+      <%- include('partials/_main') %>
   </body>
 </html>
 
