@@ -12,7 +12,12 @@ const morgan     = require('morgan');
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-
+app.use(
+  cookieSession({
+    name: 'user_email',
+    keys: ['key1'],
+  })
+);
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
