@@ -1,9 +1,8 @@
-
-
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS sites CASCADE;
-DROP TABLE IF EXISTS user_login_per_site CASCADE;
-DROP TABLE IF EXISTS admins CASCADE;
+ DROP TABLE IF EXISTS users CASCADE;
+ DROP TABLE IF EXISTS sites CASCADE;
+ DROP TABLE IF EXISTS user_login_per_site CASCADE;
+ DROP TABLE IF EXISTS admins CASCADE;
+ DROP TABLE IF EXISTS organization CASCADE;
 
 --users table
 CREATE TABLE users (
@@ -12,7 +11,8 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   admin BOOLEAN DEFAULT FALSE,
-  UNIQUE (email)
+  UNIQUE (email),
+  orgnization_id VARCHAR(50)
 );
 
 ----user_login_per_site table
@@ -34,6 +34,14 @@ CREATE TABLE admins (
   email VARCHAR(255) REFERENCES users(email) ON DELETE CASCADE
 
 );
+
+--immplement this later
+--organizations table
+-- CREATE TABLE organization (
+--   id SERIAL PRIMARY KEY NOT NULL,
+--   organization_name VARCHAR(255) NOT NULL
+-- );
+
 
 
 
