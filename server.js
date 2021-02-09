@@ -43,16 +43,10 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
-<<<<<<< HEAD
-const login = require("./routes/login");
-const register = require("./routes/register");
-const home = require("./routes/home");
-=======
 const logins = require("./routes/login");
 const register = require("./routes/register");
 const home = require("./routes/home");
 const logout = require("./routes/logout");
->>>>>>> master
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -60,11 +54,6 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
-<<<<<<< HEAD
-app.use('/login',login);
-app.use('/register',register);
-app.use('/home',home);
-=======
 app.use('/login',logins);
 app.use('/register',register);
 app.use('/home',home);
@@ -72,7 +61,6 @@ app.use('/logout',logout);
 
 // cookiesession to read incoming client cookies and encrypt userID.
 
->>>>>>> master
 
 // Home page
 // Warning: avoid creating more routes in this file!
