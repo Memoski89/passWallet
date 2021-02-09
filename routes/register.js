@@ -3,7 +3,7 @@
 let express = require('express');
 //let app = express();
 let router = express.Router();
-const cookieSession = require('cookie-session');
+// const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const { Pool } = require('pg');
@@ -20,7 +20,7 @@ router.route('/',(req,res) => {
 })
   .post((req,res) => {
 
-    console.log(req.body.Organization, 'ORGANIZATIONS')
+    //console.log(req.body.Organization, 'ORGANIZATIONS')
     let response = req.body;
     const queryString = `
     INSERT INTO users (name,email, password, admin,orgnization_id)
@@ -28,19 +28,18 @@ router.route('/',(req,res) => {
     RETURNING *;
     `;
     const values = [response.fname, response.email,response.password, response.admin, response.Organization];
-     db.query(queryString,values)
-      .then(res => {
-        console.log(values)
 
-        return res.rows[0];
+     db.query(queryString,values)
+      .then(dbres => {
+        console.log('hiii')
+        req.session.user_email = dbres.rows[0].email;
+        console.log(dbres.rows[0].email)
+
+        return res.send('you are registered');
       })
       .catch(err => {
         return console.log('query error:', err);
       });
-
-
-
-
 
     res.send('post register post req');
 
