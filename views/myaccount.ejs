@@ -43,29 +43,24 @@
                 <td><%= logins.user_name_for_site_login %></td>
                 <td><%= logins.url_for_login %></td>
                 <td><%= logins.user_password_for_site_login %></td>
+                <td>
+                  <form method="POST" action="home/editLogin:user_id">
+                    <button class="btn btn-outline-primary" type="submit">
+                      Edit
+                    </button>
+                  </form>
+                </td>
+                <td>
+                  <form method="POST" action="home/deleteLogin:user_id">
+                    <button class="btn btn-outline-danger" type="submit">
+                      Delete
+                    </button>
+                  </form>
+                </td>
             </tr>
           <% } %>
-
-           </table>
+          </table>
         <tbody>
-
-          <!-- <tr> -->
-
-            <td>
-              <form method="POST" action="home/editLogin:user_id">
-                <button class="btn btn-outline-primary" type="submit">
-                  Edit
-                </button>
-              </form>
-            </td>
-            <td>
-              <form method="POST" action="home/deleteLogin:user_id">
-                <button class="btn btn-outline-danger" type="submit">
-                  Delete
-                </button>
-              </form>
-            </td>
-          <!-- </tr> -->
         </tbody>
       </table>
     </main>
