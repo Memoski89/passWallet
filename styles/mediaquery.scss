@@ -40,6 +40,11 @@
 }
 /*  mobile view  */
 @media only screen and (max-width: 768px) {
+  body{
+    display: flex;
+    flex-direction: row;
+    background-color: yellowgreen;
+  }
   // nav {
   //   background-color: transparent;
   //   z-index: 2;
