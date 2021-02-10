@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const { Pool } = require('pg');
 const dbParams = require('../lib/db.js');
+const { restart } = require('nodemon');
 const db = new Pool(dbParams);
 db.connect();
 
@@ -15,9 +16,9 @@ db.connect();
 //get request for /home
 router.route('/')
   .get((req,res) => {
-    console.log(req.session);
+    //console.log(req.session);
     const idToStore = req.session.user_email;
-    console.log(idToStore); //why is this undefined??
+    //console.log(idToStore); //why is this undefined??
     // req.session.user_email = idToStore;
     // req.session.user_email = dbres.rows[0].email;
     // console.log(dbres.rows[0].email)
@@ -25,7 +26,7 @@ router.route('/')
     db.query(
       `SELECT * FROM user_login_per_site WHERE user_name_for_site_login = $1;`,paramsForQuery)
       .then(dbres => {
-        console.log(dbres); //works, retuns query results
+        //console.log(dbres); //works, retuns query results
         //res.json(dbres.rows[0].password);
         const queryResults = dbres.rows;
         let templateVars;
@@ -67,11 +68,30 @@ router.route('/createNewLogin: user_name_for_site_login')
 
 
 //get and post route to edit login
-router.route('/editLogin/:user_id')
+router.route('/editLogin/:user_name_for_site_login')
   .get((req,res) => {
-    console.log('hi');
-    //show foirm to edit here
-    res.send("this is the edit GET ROUTE ");
+
+    const idToStore = req.session.user_email;
+    let editID = req.params.user_name_for_site_login;
+    console.log(editID);
+    let paramsForQuery = [idToStore,editID];
+
+    // console.log(paramsForQuery);
+
+    db.query(
+      `SELECT * FROM user_login_per_site WHERE user_name_for_site_login = $1 AND
+      id = $2;`,paramsForQuery)
+      .then(dbres => {
+        //console.log(dbres); //works, retuns query results
+        //res.json(dbres.rows[0].password);
+        const queryResults = dbres.rows;
+        let templateVars =
+        { passwords: queryResults,
+          idToStore};
+
+        res.render("updatePassword",templateVars);
+
+      }).catch(e => res.send('incorrect login'));
 
     //now we need to update the user_login_per_site table;
 
@@ -80,12 +100,15 @@ router.route('/editLogin/:user_id')
 
   })
   .post((req,res) => {
-    let response = req.body;
-    let update_id = [req.params.user_name_for_site_login_ID];
+    console.log('hiiiiiiiiiiiiiiii');
+    // let response = req.body;
+    let update_id = req.params.user_name_for_site_login;
+    console.log(req.body);
+    const values = [req.body.updateLoginURL, req.body.updatePassword, update_id];
+    console.log(values);
     //const values = [response., response., response.,update_id];
-    const queryString = `INSERT INTO user_login_per_site (user_name_for_site_login,user_password_for_site_login, url_for_login)
-    VALUES ($1,$2,$3)
-    WHERE user_login_per_site.id = $4;`;
+    const queryString = `UPDATE user_login_per_site SET url_for_login = $1, user_password_for_site_login = $2
+    WHERE user_login_per_site.id = $3;`;
 
     db.query(
       queryString,values)
@@ -95,15 +118,12 @@ router.route('/editLogin/:user_id')
 
       }).catch(e => res.send('redirect to page that says email/login incorrect',e));
 
-
-
   });
 
-
-
-//post route to edit login
+//post route to delete login
 router.route('/deleteLogin/:user_name_for_site_login_ID')
   .post((req,res) => {
+
     let delete_id = [req.params.user_name_for_site_login_ID];
 
     const queryString = `DELETE FROM user_login_per_site
