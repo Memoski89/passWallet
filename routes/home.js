@@ -80,9 +80,22 @@ router.route('/editLogin/:user_id')
 
   })
   .post((req,res) => {
+    let response = req.body;
+    let update_id = [req.params.user_name_for_site_login_ID];
+    const values = [response., response., response.,update_id];
+    const queryString = `INSERT INTO user_login_per_site (user_name_for_site_login,user_password_for_site_login, url_for_login)
+    VALUES ($1,$2,$3)
+    WHERE user_login_per_site.id = $4;`;
 
-    //actual edit here
-    res.send("this is the edit POST ROUTE ");
+    db.query(
+      queryString,values)
+      .then(dbres => {
+
+        res.redirect("/home");
+
+      }).catch(e => res.send('redirect to page that says email/login incorrect',e));
+
+
 
   });
 
@@ -92,12 +105,6 @@ router.route('/editLogin/:user_id')
 router.route('/deleteLogin/:user_name_for_site_login_ID')
   .post((req,res) => {
     let delete_id = [req.params.user_name_for_site_login_ID];
-    console.log(delete_id);
-    //res.send("delete POST rost");
-
-    //PLACEHOLDERS FOR QUERY
-    //$1
-    //console.log(logins.id);
 
     const queryString = `DELETE FROM user_login_per_site
     WHERE user_login_per_site.id = $1;`;
@@ -105,34 +112,10 @@ router.route('/deleteLogin/:user_name_for_site_login_ID')
     db.query(
       queryString,delete_id)
       .then(dbres => {
-        // const queryResults = dbres.rows;
-        // let templateVars;
-        // if (req.session.user_email) {
-        //   templateVars =
-        //   { passwords: queryResults,
-        //     idToStore
-        //   };
-        // } else {
-        //   templateVars =
-        //   { passwords: queryResults,
-        //     idToStore: null
-        //   };
-        // }
 
-        //res.render('index', templateVars);
-
-        //here we rended our saved passwords
         res.redirect("/home");
 
-
-
       }).catch(e => res.send('redirect to page that says email/login incorrect',e));
-
-
-
-
-
-
 
   });
 
