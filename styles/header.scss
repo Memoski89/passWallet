@@ -1,6 +1,6 @@
 header {
   display: flex;
-  background-color: #97572b;
+  background-color: lightblue;
   justify-content: space-between;
   flex-direction: column;
   height: 100px;
@@ -16,15 +16,9 @@ header {
     display: flex;
     justify-content: space-between;
 
-
-
     a {
       text-decoration: none;
       color: inherit;
     }
   }
-}
-
-.nav-logo {
-  font-family: "Playfair Display", serif;
 }

@@ -1,0 +1,70 @@
+/* desktop view */
+
+@media only screen and (min-width: 1024px) {
+  // body {
+  //   display: flex;
+  //   flex-direction: row;
+  // }
+  // .respector {
+  //   width: 40%;
+  // }
+  // .page-header {
+  //   position: fixed;
+  //   width: 20%;
+  // }
+  // main {
+  //   width: 60%;
+
+  //   margin-right: 2em;
+  // }
+}
+
+/* tablet view */
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  // body {
+  //   display: flex;
+  //   flex-direction: row;
+  // }
+  // .respector {
+  //   width: 40%;
+  // }
+  // .page-header {
+  //   position: fixed;
+  //   width: 20%;
+  // }
+  // main {
+  //   width: 60%;
+  //   margin-right: 2em;
+  // }
+}
+/*  mobile view  */
+@media only screen and (max-width: 768px) {
+  // nav {
+  //   background-color: transparent;
+  //   z-index: 2;
+
+  // }
+  // nav.scrolled {
+  //   background-color: #fc8c03;
+  //   transition: background-color 100ms linear;
+  //   background-image: url("https://www.transparenttextures.com/patterns/transparent-square-tiles.png");
+
+  // }
+  // .page-header {
+  //   margin-top: 0;
+  //   z-index: 1;
+  // }
+  // .content-scroll {
+  //   flex-direction: column;
+  //   margin-top: 0;
+  //   padding: 0;
+  // }
+  // .profile-pic {
+  //   width: 50%;
+  //   margin-top: 10px;
+  // }
+  // .container {
+  //   padding-top: 2em;
+  // }
+}

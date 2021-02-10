@@ -1,25 +1,76 @@
-.brand-quote{
- justify-content: center;
+.brand-quote {
+  justify-content: center;
 }
-main{
-  margin:  100px;
-  background-color: pink;
-  width: 90%;
+main {
+  padding-top: 120px;
+  text-align: center;
+
+  background-color: silver;
   align-self: center;
 }
-.change-pass{
-  height:2em;
-  width: 2em;
+.change-pass {
+  text-align: center;
+  height: 3em;
+  width: 3em;
 }
-.admin{
-  height:2em;
-  width: 2em;
+.admin {
+  text-align: center;
+  height: 3em;
+  width: 3em;
 }
-.password{
-  height:2em;
-  width: 2em;
+.password {
+  text-align: center;
+  height: 3em;
+  width: 3em;
 }
-.profile{
-  height:2em;
-  width: 2em;
+.profile {
+  text-align: center;
+  height: 3em;
+  width: 3em;
+}
+.features {
+  display: flex;
+  p {
+    font-size: 10px;
+  }
+  a {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+.sponsors-logos {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  justify-content: space-around;
+  a {
+    filter: grey;
+    filter: grayscale(100%);
+    opacity: 0.5;
+  }
+}
+.amazon{
+  height: 5em;
+  width: 5em
+}
+.discord{
+  height: 5em;
+  width: 5em
+}
+.github{
+  height: 5em;
+  width: 5em
+}
+.lighthouse{
+  height: 5em;
+  width: 5em
+}
+.newyorktimes{
+  height: 5em;
+  width: 5em
+}
+.nike{
+  height: 5em;
+  width: 5em
 }
