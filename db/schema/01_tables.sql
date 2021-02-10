@@ -18,7 +18,7 @@ CREATE TABLE users (
 ----user_login_per_site table
 CREATE TABLE user_login_per_site (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
   user_name_for_site_login VARCHAR(255) NOT NULL,
   user_password_for_site_login VARCHAR(255) NOT NULL,
   url_for_login VARCHAR(255) NOT NULL

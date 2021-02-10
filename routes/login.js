@@ -28,6 +28,8 @@ router.route('/',(req,res) => {
 
 })
   .post((req,res) => {
+
+
     console.log('post route')
     const inputPassword = req.body.password;
     const inputEmail = req.body.email;

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <title>Passwallet-Login</title>
+        <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+        <link
+          rel="stylesheet"
+          href="/vendor/normalize-4.1.1.css"
+          type="text/css"
+        />
+        <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+        <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+      </head>
+      <body>
+
+        <%- include('partials/_loggedheader') %>
+        <main>
+          <h3>Create New Login</h3>
+
+          <form method="POST" action="/home/createNewLogin">
+            <h4>Enter Username for this login:</h4>
+            <input
+              type="text"
+              id="user_name_for_site_login"
+              name="user_name_for_site_login"
+              placeholder="User Name for login"
+            /><br />
+            <h4>Enter password for this login:</h4>
+            <input type="text" name="user_password_for_site_login" placeholder="Enter Password for this login" />
+            <h4>Address/URL for login:</h4>
+            <input
+              type="text"
+              id="url_for_login"
+              name="url_for_login"
+              placeholder="Login address"
+            />
+            <div style="margin-top: 1em">
+              <button class="btn btn-primary" type="submit">Register</button>
+            </div>
+          </form>
+        </main>
+      </body>
+    </html>
+  </head>
+</html>

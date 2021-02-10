@@ -16,24 +16,30 @@ db.connect();
 //get request for /home
 router.route('/')
   .get((req,res) => {
-    //console.log(req.session);
-    const idToStore = req.session.user_email;
-    //console.log(idToStore); //why is this undefined??
-    // req.session.user_email = idToStore;
-    // req.session.user_email = dbres.rows[0].email;
-    // console.log(dbres.rows[0].email)
-    let paramsForQuery = [idToStore];
-    db.query(
-      `SELECT * FROM user_login_per_site WHERE user_name_for_site_login = $1;`,paramsForQuery)
-      .then(dbres => {
+
+    const userEmail = req.session.user_email;
+
+    const userEmailCookie = [`%${req.session.user_email}%`]; //seanPaul@eamil.com
+    const findUSerString = `SELECT id FROM users WHERE email LIKE $1;`;
+    console.log(userEmailCookie);
+    db.query(findUSerString, userEmailCookie)
+      .then((dbres)=>{
+
+        const userID = [dbres.rows[0].id];
+        //console.log(userID);
+
+        return db.query(`SELECT * FROM user_login_per_site WHERE user_id = $1;`, userID);
+
+
+      }).then(dbres => {
         //console.log(dbres); //works, retuns query results
         //res.json(dbres.rows[0].password);
         const queryResults = dbres.rows;
         let templateVars;
-        if (req.session.user_email) {
+        if (userEmail) {
           templateVars =
           { passwords: queryResults,
-            idToStore
+            idToStore: userEmail
           };
         } else {
           templateVars =
@@ -48,21 +54,9 @@ router.route('/')
         res.render("myaccount",templateVars);
 
 
-      }).catch(e => res.send('redirect to page that says email/login incorrect',e));
+      }).catch(e => console.log('redirect to page that says email/login incorrect',e));
 
 
-  });
-
-//get and post route to create new login
-router.route('/createNewLogin: user_name_for_site_login')
-  .get((req,res) => {
-
-    res.send("this iscreate new login userig");
-
-  })
-  .post((req,res) => {
-
-    res.send("this iscreate new login userig");
 
   });
 
@@ -71,12 +65,11 @@ router.route('/createNewLogin: user_name_for_site_login')
 router.route('/editLogin/:user_name_for_site_login')
   .get((req,res) => {
 
-    const idToStore = req.session.user_email;
-    let editID = req.params.user_name_for_site_login;
-    console.log(editID);
-    let paramsForQuery = [idToStore,editID];
+    const userEmail = req.session.user_email;
 
-    // console.log(paramsForQuery);
+    let editID = req.params.user_name_for_site_login;
+
+    let paramsForQuery = [userEmail,editID];
 
     db.query(
       `SELECT * FROM user_login_per_site WHERE user_name_for_site_login = $1 AND
@@ -87,23 +80,17 @@ router.route('/editLogin/:user_name_for_site_login')
         const queryResults = dbres.rows;
         let templateVars =
         { passwords: queryResults,
-          idToStore};
+          idToStore: userEmail};
 
         res.render("updatePassword",templateVars);
 
       }).catch(e => res.send('incorrect login'));
 
-    //now we need to update the user_login_per_site table;
-
-    //need to display same forms as on register a new url
-    //get information and update the same row in user_login_per_site
-
   })
   .post((req,res) => {
-    console.log('hiiiiiiiiiiiiiiii');
-    // let response = req.body;
+
     let update_id = req.params.user_name_for_site_login;
-    console.log(req.body);
+
     const values = [req.body.updateLoginURL, req.body.updatePassword, update_id];
     console.log(values);
     //const values = [response., response., response.,update_id];
@@ -140,13 +127,55 @@ router.route('/deleteLogin/:user_name_for_site_login_ID')
   });
 
 
-// //get route for user to view their saved passwords
-// router.route('/myPasswords:user_id')
-//   .get((req,res) => {
+//get and post route to create new login
+router.route('/createNewLogin')
+  .get((req,res) => {
+    //
+    const userEmail = req.session.user_email;
+    let templateVars = { idToStore: userEmail};
 
-//     res.send("this iscreate delete user id");
+    res.render("createNewLogin",templateVars);
 
-//   });
+
+  })
+  .post((req,res) => {
+    // console.log("POST ROUTE CREATE NEW LOGIN");
+    // res.send("POST ROUTE CREATE NEW LOGIN");
+    //user email
+    const userEmail = [req.session.user_email]; //seanPaul@eamil.com
+    const findUSerString = `SELECT id FROM users WHERE email = $1; `;
+
+
+
+    // const values = [req.body.updateLoginURL, req.body.updatePassword, update_id];
+
+    // console.log(queryParams);
+
+    db.query(
+      findUSerString,userEmail)
+      .then(dbres => {
+        const user_id = dbres.rows[0].id;
+
+        const queryString = `
+        INSERT INTO user_login_per_site (user_id, user_name_for_site_login, user_password_for_site_login, url_for_login)
+        VALUES ($1, $2, $3, $4);
+        `;
+
+        const queryParams = [user_id, req.body.user_name_for_site_login, req.body.user_password_for_site_login ,req.body.url_for_login];
+
+        return db.query(queryString, queryParams);
+
+      }).then((a)=>{
+        console.log('IN 2nd .then', a.rows[0]);
+
+        res.redirect("/home");
+
+      }).catch(e => res.send('redirect to page that says email/login incorrect',e));
+
+
+  });
+
+
 
 // //get route for ADMIN to view their organizations saved passwords
 // router.route('/myOrganizationPasswords:id')
