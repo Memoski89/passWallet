@@ -44,14 +44,14 @@
                 <td><%= logins.url_for_login %></td>
                 <td><%= logins.user_password_for_site_login %></td>
                 <td>
-                  <form method="POST" action="home/editLogin:user_id">
+                  <a href="home/editLogin/<%=logins.id%>">
                     <button class="btn btn-outline-primary" type="submit">
                       Edit
                     </button>
-                  </form>
+                  </a>
                 </td>
                 <td>
-                  <form method="POST" action="home/deleteLogin:user_id">
+                  <form method="POST" action="home/deleteLogin/<%=logins.id%>">
                     <button class="btn btn-outline-danger" type="submit">
                       Delete
                     </button>
