@@ -21,14 +21,14 @@ router.route('/')
     // req.session.user_email = idToStore;
     // req.session.user_email = dbres.rows[0].email;
     // console.log(dbres.rows[0].email)
-
+    let paramsForQuery = [idToStore];
     db.query(
-      `SELECT * FROM user_login_per_site;`)
+      `SELECT * FROM user_login_per_site WHERE user_name_for_site_login = $1;`,paramsForQuery)
       .then(dbres => {
         console.log(dbres); //works, retuns query results
         //res.json(dbres.rows[0].password);
-        const queryResults = dbres;
-        let templateVars
+        const queryResults = dbres.rows;
+        let templateVars;
         if (req.session.user_email) {
           templateVars =
           { passwords: queryResults,
@@ -53,7 +53,7 @@ router.route('/')
   });
 
 //get and post route to create new login
-router.route('/createNewLogin:user_id')
+router.route('/createNewLogin: user_name_for_site_login')
   .get((req,res) => {
 
     res.send("this iscreate new login userig");
@@ -65,42 +65,75 @@ router.route('/createNewLogin:user_id')
 
   });
 
-//get and post routes to edit an existing login
-router.route('/editLogin:user_id')
-  .get((req,res) => {
 
-    res.send("this iscreate new edit user ");
+//get and post route to edit login
+router.route('/editLogin/:user_id')
+  .get((req,res) => {
+    console.log('hi');
+    //show foirm to edit here
+    res.send("this is the edit GET ROUTE ");
+
+    //now we need to update the user_login_per_site table;
+
+    //need to display same forms as on register a new url
+    //get information and update the same row in user_login_per_site
 
   })
   .post((req,res) => {
+    let response = req.body;
+    let update_id = [req.params.user_name_for_site_login_ID];
+    const values = [response., response., response.,update_id];
+    const queryString = `INSERT INTO user_login_per_site (user_name_for_site_login,user_password_for_site_login, url_for_login)
+    VALUES ($1,$2,$3)
+    WHERE user_login_per_site.id = $4;`;
 
-    res.send("this iscreate new login userig");
+    db.query(
+      queryString,values)
+      .then(dbres => {
+
+        res.redirect("/home");
+
+      }).catch(e => res.send('redirect to page that says email/login incorrect',e));
+
+
 
   });
 
-//delete only has a post route
-router.route('/deleteLogin:user_id')
+
+
+//post route to edit login
+router.route('/deleteLogin/:user_name_for_site_login_ID')
   .post((req,res) => {
+    let delete_id = [req.params.user_name_for_site_login_ID];
 
-    res.send("this iscreate delete user id");
+    const queryString = `DELETE FROM user_login_per_site
+    WHERE user_login_per_site.id = $1;`;
 
-  });
+    db.query(
+      queryString,delete_id)
+      .then(dbres => {
 
+        res.redirect("/home");
 
-//get route for user to view their saved passwords
-router.route('/myPasswords:user_id')
-  .get((req,res) => {
-
-    res.send("this iscreate delete user id");
-
-  });
-
-//get route for ADMIN to view their organizations saved passwords
-router.route('/myOrganizationPasswords:id')
-  .get((req,res) => {
-
-    res.send("/home/myOrganizationPasswords:id");
+      }).catch(e => res.send('redirect to page that says email/login incorrect',e));
 
   });
+
+
+// //get route for user to view their saved passwords
+// router.route('/myPasswords:user_id')
+//   .get((req,res) => {
+
+//     res.send("this iscreate delete user id");
+
+//   });
+
+// //get route for ADMIN to view their organizations saved passwords
+// router.route('/myOrganizationPasswords:id')
+//   .get((req,res) => {
+
+//     res.send("/home/myOrganizationPasswords:id");
+
+//   });
 
 module.exports = router;

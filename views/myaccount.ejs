@@ -19,9 +19,8 @@
     <%- include('partials/_loggedheader') %>
     <main>
       <h3>My Accounts</h3>
-
       <table class="table">
-        <thead>
+        <!-- <thead>
           <tr>
             <th scope="col">Organization</th>
             <th scope="col">Password</th>
@@ -29,8 +28,9 @@
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
           </tr>
-        </thead>
-        <tbody>
+        </thead> -->
+       <%JSON.stringify(passwords) %>
+        <table>
           <tr>
             <td>Organization</td>
             <td>password></td>
@@ -52,6 +52,30 @@
               </form>
             </td>
           </tr>
+          <% for (const logins of passwords) { %>
+            <tr>
+                <td><%= logins.id %></td>
+                <td><%= logins.user_name_for_site_login %></td>
+                <td><%= logins.url_for_login %></td>
+                <td><%= logins.user_password_for_site_login %></td>
+                <td>
+                  <a href="home/editLogin/<%=logins.id%>">
+                    <button class="btn btn-outline-primary" type="submit">
+                      Edit
+                    </button>
+                  </a>
+                </td>
+                <td>
+                  <form method="POST" action="home/deleteLogin/<%=logins.id%>">
+                    <button class="btn btn-outline-danger" type="submit">
+                      Delete
+                    </button>
+                  </form>
+                </td>
+            </tr>
+          <% } %>
+          </table>
+        <tbody>
         </tbody>
       </table>
     </main>
