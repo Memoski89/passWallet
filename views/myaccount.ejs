@@ -13,7 +13,11 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/myaccount.css" type="text/css" />
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script
+      type="text/javascript"
+      src="/scripts/copytoclipboard.js"></script>
   </head>
   <body>
     <%- include('partials/_loggedheader') %>
@@ -28,7 +32,7 @@
             <th scope="col">Delete</th>
           </tr>
         </thead> -->
-       <%JSON.stringify(passwords) %>
+        <%JSON.stringify(passwords) %>
 
         <table>
           <tr>
@@ -38,30 +42,37 @@
             <th>password</th>
           </tr>
           <% for (const logins of passwords) { %>
-            <tr>
-                <td><%= logins.id %></td>
-                <td><%= logins.user_name_for_site_login %></td>
-                <td><%= logins.url_for_login %></td>
-                <td><%= logins.user_password_for_site_login %></td>
-                <td>
-                  <a href="home/editLogin/<%=logins.id%>">
-                    <button class="btn btn-outline-primary" type="submit">
-                      Edit
-                    </button>
-                  </a>
-                </td>
-                <td>
-                  <form method="POST" action="home/deleteLogin/<%=logins.id%>">
-                    <button class="btn btn-outline-danger" type="submit">
-                      Delete
-                    </button>
-                  </form>
-                </td>
-            </tr>
+          <tr>
+            <td><%= logins.id %></td>
+            <td><%= logins.user_name_for_site_login %></td>
+            <td><%= logins.url_for_login %></td>
+            <td>
+              <input
+                type="text" class='invisible-text'
+                value="<%= logins.user_password_for_site_login %>"
+                id="myInput"
+              />
+              <button onclick="myFunction()">copy password into url</button>
+            </td>
+
+            <td>
+              <a href="home/editLogin/<%=logins.id%>">
+                <button class="btn btn-outline-primary" type="submit">
+                  Edit
+                </button>
+              </a>
+            </td>
+            <td>
+              <form method="POST" action="home/deleteLogin/<%=logins.id%>">
+                <button class="btn btn-outline-danger" type="submit">
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
           <% } %>
-          </table>
-        <tbody>
-        </tbody>
+        </table>
+        <tbody></tbody>
       </table>
     </main>
   </body>
