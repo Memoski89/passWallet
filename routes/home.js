@@ -68,24 +68,33 @@ router.route('/createNewLogin: user_name_for_site_login')
 
 //get and post route to edit login
 router.route('/editLogin/:user_id')
-  .get((req,res) => {
-    console.log('hi');
+  .get((dbres) => {
+    //console.log('hi');
     //show foirm to edit here
-    res.send("this is the edit GET ROUTE ");
+    const idToStore = dbres.rows[0].email;
+    //req.session.user_email = idToStore;
+
+    const templateVars =
+    { idToStore
+    };
+
+
+    res.render("edit", templateVars);
 
     //now we need to update the user_login_per_site table;
 
     //need to display same forms as on register a new url
     //get information and update the same row in user_login_per_site
 
+
   })
   .post((req,res) => {
     let response = req.body;
     let update_id = [req.params.user_name_for_site_login_ID];
-    const values = [response., response., response.,update_id];
-    const queryString = `INSERT INTO user_login_per_site (user_name_for_site_login,user_password_for_site_login, url_for_login)
-    VALUES ($1,$2,$3)
-    WHERE user_login_per_site.id = $4;`;
+    //const values = [response., response.,update_id];
+    const queryString = `INSERT INTO user_login_per_site (user_password_for_site_login, url_for_login)
+    VALUES ($1,$2)
+    WHERE user_login_per_site.id = $3;`;
 
     db.query(
       queryString,values)

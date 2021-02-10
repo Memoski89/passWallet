@@ -51,33 +51,6 @@
               </form>
             </td>
           </tr>
-<<<<<<< HEAD
-=======
-          <% for (const logins of passwords) { %>
-            <tr>
-                <td><%= logins.id %></td>
-                <td><%= logins.user_name_for_site_login %></td>
-                <td><%= logins.url_for_login %></td>
-                <td><%= logins.user_password_for_site_login %></td>
-                <td>
-                  <a href="home/editLogin/<%=logins.id%>">
-                    <button class="btn btn-outline-primary" type="submit">
-                      Edit
-                    </button>
-                  </a>
-                </td>
-                <td>
-                  <form method="POST" action="home/deleteLogin/<%=logins.id%>">
-                    <button class="btn btn-outline-danger" type="submit">
-                      Delete
-                    </button>
-                  </form>
-                </td>
-            </tr>
-          <% } %>
-          </table>
-        <tbody>
->>>>>>> aeb13e873f9549c1b7648255751956162583f882
         </tbody>
         <% } %>
       </table>
