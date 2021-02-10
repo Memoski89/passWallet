@@ -53,7 +53,7 @@ router.route('/')
   });
 
 //get and post route to create new login
-router.route('/createNewLogin:user_id')
+router.route('/createNewLogin: user_name_for_site_login')
   .get((req,res) => {
 
     res.send("this iscreate new login userig");
@@ -67,23 +67,72 @@ router.route('/createNewLogin:user_id')
 
 
 //get and post route to edit login
-router.route('/editLogin:user_id')
+router.route('/editLogin/:user_id')
   .get((req,res) => {
     console.log('hi');
-    res.send("this iscreate new edit userig");
+    //show foirm to edit here
+    res.send("this is the edit GET ROUTE ");
+
+    //now we need to update the user_login_per_site table;
+
+    //need to display same forms as on register a new url
+    //get information and update the same row in user_login_per_site
 
   })
   .post((req,res) => {
 
-    res.send("this iscreate new edit userig");
+    //actual edit here
+    res.send("this is the edit POST ROUTE ");
 
   });
 
-//get and post route to edit login
-router.route('/deleteLogin:user_id')
-  .post((req,res) => {
 
-    res.send("this iscreate delete POST userig");
+
+//post route to edit login
+router.route('/deleteLogin/:user_name_for_site_login_ID')
+  .post((req,res) => {
+    let delete_id = [req.params.user_name_for_site_login_ID];
+    console.log(delete_id);
+    //res.send("delete POST rost");
+
+    //PLACEHOLDERS FOR QUERY
+    //$1
+    //console.log(logins.id);
+
+    const queryString = `DELETE FROM user_login_per_site
+    WHERE user_login_per_site.id = $1;`;
+
+    db.query(
+      queryString,delete_id)
+      .then(dbres => {
+        // const queryResults = dbres.rows;
+        // let templateVars;
+        // if (req.session.user_email) {
+        //   templateVars =
+        //   { passwords: queryResults,
+        //     idToStore
+        //   };
+        // } else {
+        //   templateVars =
+        //   { passwords: queryResults,
+        //     idToStore: null
+        //   };
+        // }
+
+        //res.render('index', templateVars);
+
+        //here we rended our saved passwords
+        res.redirect("/home");
+
+
+
+      }).catch(e => res.send('redirect to page that says email/login incorrect',e));
+
+
+
+
+
+
 
   });
 
