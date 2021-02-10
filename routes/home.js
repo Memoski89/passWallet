@@ -82,7 +82,7 @@ router.route('/editLogin/:user_id')
   .post((req,res) => {
     let response = req.body;
     let update_id = [req.params.user_name_for_site_login_ID];
-    const values = [response., response., response.,update_id];
+    //const values = [response., response., response.,update_id];
     const queryString = `INSERT INTO user_login_per_site (user_name_for_site_login,user_password_for_site_login, url_for_login)
     VALUES ($1,$2,$3)
     WHERE user_login_per_site.id = $4;`;

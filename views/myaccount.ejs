@@ -23,34 +23,19 @@
         <!-- <thead>
           <tr>
             <th scope="col">Organization</th>
-            <th scope="col">Password</th>
-            <th scope="col">Copy</th>
+            <th scope="col">password</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
           </tr>
         </thead> -->
        <%JSON.stringify(passwords) %>
+
         <table>
           <tr>
-            <td>Organization</td>
-            <td>password></td>
-            <td>
-              <button></button>
-            </td>
-            <td>
-              <form method="POST" action="/">
-                <button class="btn btn-outline-primary" type="submit">
-                  Edit
-                </button>
-              </form>
-            </td>
-            <td>
-              <form method="POST" action="/">
-                <button class="btn btn-outline-danger" type="submit">
-                  Delete
-                </button>
-              </form>
-            </td>
+            <th>id</th>
+            <th>username</th>
+            <th>homepage/loginpage</th>
+            <th>password</th>
           </tr>
           <% for (const logins of passwords) { %>
             <tr>
