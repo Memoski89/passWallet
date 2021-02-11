@@ -23,15 +23,36 @@ router.route('/')
 
     const userEmailCookie = [`%${req.session.user_email}%`]; //seanPaul@eamil.com
     const findUSerString = `SELECT id FROM users WHERE email LIKE $1;`;
-    console.log(userEmailCookie);
+    //console.log(userEmailCookie);
     db.query(findUSerString, userEmailCookie)
       .then((dbres)=>{
 
         const userID = [dbres.rows[0].id];
         //console.log(userID);
 
-        return db.query(`SELECT * FROM user_login_per_site WHERE user_id = $1;`, userID);
+        //this will be the query to return grouped by result
+        return db.query(`SELECT DISTINCT category FROM user_login_per_site WHERE user_id = $1;`, userID);
 
+
+      }).then(dbres => {
+        const queryResults = dbres.rows;
+
+        console.log(queryResults);
+
+        let templateVars;
+        if (userEmail) {
+          templateVars =
+          { categories: queryResults,
+            idToStore: userEmail
+          };
+        } else {
+          templateVars =
+          { categories: queryResults,
+            idToStore: null
+          };
+        }
+
+        res.render('showCategories', templateVars);
 
       }).then(dbres => {
         //console.log(dbres); //works, retuns query results
@@ -50,17 +71,90 @@ router.route('/')
           };
         }
 
-        //res.render('index', templateVars);
-
-        //here we rended our saved passwords
         res.render("myaccount",templateVars);
-
-
-      }).catch(e => console.log('redirect to page that says email/login incorrect',e));
-
-
+      })
+      .catch(e => console.log('ERROR LINE 76',e));
 
   });
+
+//route for what happens when you  click categries that are rendered on home page.
+//get request for /home
+router.route('/:category')
+  .get((req,res) => {
+
+    const userEmail = req.session.user_email;
+    console.log(req.params);
+    const userEmailCookie = [`%${req.session.user_email}%`]; //seanPaul@eamil.com
+    const findUSerString = `SELECT id FROM users WHERE email LIKE $1;`;
+    //console.log(userEmailCookie);
+    db.query(findUSerString, userEmailCookie)
+      .then((dbres)=>{
+
+        const userID = [dbres.rows[0].id];
+        //console.log(userID);
+
+        //this will be the query to return grouped by result
+        return db.query(`SELECT * category FROM user_login_per_site WHERE user_id = $1 AND category = $2;`, userID);
+
+
+      }).then(dbres => {
+        const queryResults = dbres.rows;
+
+        console.log(queryResults);
+
+        let templateVars;
+        if (userEmail) {
+          templateVars =
+          { categories: queryResults,
+            idToStore: userEmail
+          };
+        } else {
+          templateVars =
+          { categories: queryResults,
+            idToStore: null
+          };
+        }
+
+        res.render('showCategories', templateVars);
+
+      }).then(dbres => {
+        //console.log(dbres); //works, retuns query results
+        //res.json(dbres.rows[0].password);
+        const queryResults = dbres.rows;
+        let templateVars;
+        if (userEmail) {
+          templateVars =
+          { passwords: queryResults,
+            idToStore: userEmail
+          };
+        } else {
+          templateVars =
+          { passwords: queryResults,
+            idToStore: null
+          };
+        }
+
+        res.render("myaccount",templateVars);
+      })
+      .catch(e => console.log('ERROR LINE 76',e));
+
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////
+
 
 
 //get and post route to edit login
