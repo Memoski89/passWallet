@@ -7,8 +7,7 @@
 --organizations table
 CREATE TABLE organization (
   id SERIAL PRIMARY KEY NOT NULL,
-  organization_name VARCHAR(255) NOT NULL,
-  category VARCHAR(50)
+  organization_name VARCHAR(255) NOT NULL
 
 );
 
@@ -27,8 +26,8 @@ CREATE TABLE users (
 CREATE TABLE admins (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  email VARCHAR(255) REFERENCES users(email) ON DELETE CASCADE
-
+  email VARCHAR(255) REFERENCES users(email) ON DELETE CASCADE,
+  organization_id INTEGER REFERENCES organization(id) ON DELETE CASCADE NOT NULL
 );
 ----user_login_per_site table
 ----user_login_per_site table
@@ -38,7 +37,8 @@ CREATE TABLE user_login_per_site (
   user_name_for_site_login VARCHAR(255) NOT NULL,
   user_password_for_site_login VARCHAR(255) NOT NULL,
   url_for_login VARCHAR(255) NOT NULL,
-  organization_id INTEGER REFERENCES organization(id) ON DELETE CASCADE NOT NULL
+  category VARCHAR(50)
+
   -- category VARCHAR(50)REFERENCES organization(category) ON DELETE CASCADE NOT NULL
   --site_id INTEGER REFERENCES sites(id) -- this is needed so that we can use username and pw to login to a site.. think that the user will need to provide the url for which the login details are used for.. we need to look up that site_id and store it here..
 );

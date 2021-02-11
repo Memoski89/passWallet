@@ -1,6 +1,7 @@
-function myFunction() {
+/* eslint-disable func-style */
+function myFunction(input) {
   /* Get the text field */
-  var copyText = document.getElementById("myInput");
+  let copyText = document.getElementById(input);
 
   /* Select the text field */
   copyText.select();
@@ -12,3 +13,5 @@ function myFunction() {
   /* Alert the copied text */
   alert("Copied the password: " + copyText.value);
 }
+
+
