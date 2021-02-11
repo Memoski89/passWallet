@@ -23,17 +23,21 @@
     <%- include('partials/_loggedheader') %>
     <main>
       <h3>My Login Categories</h3>
+      <form method="GET" action="/home/:category">
       <table class="table">
         <%JSON.stringify(categories) %>
         <table>
           <% for (const x in categories) { %>
           <tr>
-            <a href= "<%= categories[x].category %>" </a>
-            <div><%= categories[x].category %></div>
+              <td>
+                <a href= "home/<%= categories[x].category %>">
+                <div><%= categories[x].category %></div></a>
+              </td>
+          </tr>
           <% } %>
         </table>
-        <tbody></tbody>
       </table>
+    </form>
     </main>
   </body>
 </html>
