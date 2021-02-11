@@ -10,6 +10,8 @@ const { Pool } = require('pg');
 const dbParams = require('../lib/db.js');
 const { restart } = require('nodemon');
 const db = new Pool(dbParams);
+const {generatePassword} = require('../helperFunctions/jsHelpers/passWordGenerator.js')
+
 db.connect();
 
 
@@ -91,9 +93,10 @@ router.route('/editLogin/:user_name_for_site_login')
 
     let update_id = req.params.user_name_for_site_login;
 
-    const values = [req.body.updateLoginURL, req.body.updatePassword, update_id];
-    console.log(values);
-    //const values = [response., response., response.,update_id];
+
+    // const values = [req.body.updateLoginURL, req.body.updatePassword, update_id];
+    // console.log(values);
+    // //const values = [response., response., response.,update_id];
     const queryString = `UPDATE user_login_per_site SET url_for_login = $1, user_password_for_site_login = $2
     WHERE user_login_per_site.id = $3;`;
 
@@ -145,7 +148,13 @@ router.route('/createNewLogin')
     const userEmail = [req.session.user_email]; //seanPaul@eamil.com
     const findUSerString = `SELECT id FROM users WHERE email = $1; `;
 
+    const passwordInput = (req.body.upper, req.body.lower, req.body.number, req.body.symbol, req.body.length);
 
+    const ourGeneratedPassword = generatePassword(Number(req.body.upper), Number(req.body.lower), Number(req.body.number), Number(req.body.symbol), Number(req.body.length));
+
+    console.log(ourGeneratedPassword);
+
+    //
 
     // const values = [req.body.updateLoginURL, req.body.updatePassword, update_id];
 
