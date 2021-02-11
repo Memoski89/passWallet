@@ -10,7 +10,7 @@ const { Pool } = require('pg');
 const dbParams = require('../lib/db.js');
 const { restart } = require('nodemon');
 const db = new Pool(dbParams);
-const {generatePassword} = require('../helperFunctions/jsHelpers/passWordGenerator.js')
+const {generatePassword} = require('../helperFunctions/jsHelpers/passWordGenerator.js');
 
 db.connect();
 
@@ -152,7 +152,7 @@ router.route('/createNewLogin')
 
     const ourGeneratedPassword = generatePassword(Number(req.body.upper), Number(req.body.lower), Number(req.body.number), Number(req.body.symbol), Number(req.body.length));
 
-    console.log(ourGeneratedPassword);
+    //console.log(ourGeneratedPassword);
 
     //
 
@@ -165,14 +165,36 @@ router.route('/createNewLogin')
       .then(dbres => {
         const user_id = dbres.rows[0].id;
 
-        const queryString = `
-        INSERT INTO user_login_per_site (user_id, user_name_for_site_login, user_password_for_site_login, url_for_login)
-        VALUES ($1, $2, $3, $4);
-        `;
+        //$3 is either ourGeneratedPassword OR req.body.user_password_for_site_login
+        if ((ourGeneratedPassword)) {
+          //if our function has been used to generate the values, use the result from the function when inserting
+          const queryString = `
+          INSERT INTO user_login_per_site (user_id, user_name_for_site_login, user_password_for_site_login, url_for_login)
+          VALUES ($1, $2, $3, $4);
+          `;
 
-        const queryParams = [user_id, req.body.user_name_for_site_login, req.body.user_password_for_site_login ,req.body.url_for_login];
+          const queryParams = [user_id, req.body.user_name_for_site_login, ourGeneratedPassword ,req.body.url_for_login];
 
-        return db.query(queryString, queryParams);
+          return db.query(queryString, queryParams);
+
+        } else if (req.body.user_password_for_site_login) {
+          //otherwise use user password
+
+          const queryString = `
+          INSERT INTO user_login_per_site (user_id, user_name_for_site_login, user_password_for_site_login, url_for_login)
+          VALUES ($1, $2, $3, $4);
+          `;
+
+          const queryParams = [user_id, req.body.user_name_for_site_login, req.body.user_password_for_site_login ,req.body.url_for_login];
+
+          return db.query(queryString, queryParams);
+        } else {
+
+          res.send('PASSWRD EMPTY');
+
+        }
+
+
 
       }).then((a)=>{
         console.log('IN 2nd .then', a.rows[0]);
