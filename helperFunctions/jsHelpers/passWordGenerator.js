@@ -59,6 +59,6 @@ function generatePassword(upper, lower, number, symbol, length) {
   return finalPassword;
 }
 
-console.log(generatePassword(0,0,0,1,20));
+//console.log(generatePassword(0,0,0,1,20));
 
 module.exports = {generatePassword};

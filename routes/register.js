@@ -29,7 +29,7 @@ router.route('/',(req,res) => {
     `;
     const values = [response.fname, response.email,response.password, response.admin, response.Organization];
 
-     db.query(queryString,values)
+    db.query(queryString,values)
       .then(dbres => {
         const idToStore = dbres.rows[0].email;
         req.session.user_email = idToStore;

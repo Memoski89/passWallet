@@ -197,7 +197,7 @@ router.route('/createNewLogin')
 
 
       }).then((a)=>{
-        console.log('IN 2nd .then', a.rows[0]);
+        //console.log('IN 2nd .then', a.rows[0]);
 
         res.redirect("/home");
 

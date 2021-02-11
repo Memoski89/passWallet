@@ -22,7 +22,7 @@ let router = express.Router();
 
 // console.log(cookieSession)
 router.route('/',(req,res) => {
-  console.log('upper route')
+  console.log('upper route');
 
   res.send('logins get req');
 
@@ -30,7 +30,7 @@ router.route('/',(req,res) => {
   .post((req,res) => {
 
 
-    console.log('post route')
+    //console.log('post route');
     const inputPassword = req.body.password;
     const inputEmail = req.body.email;
 
@@ -39,11 +39,11 @@ router.route('/',(req,res) => {
     db.query(
       `SELECT * FROM users WHERE users.email = $1 ;`,loginDetails)
       .then(dbres => {
-        console.log('post db query')
+        //console.log('post db query');
         //res.json(dbres.rows[0].password);
-        const queryResults = (dbres.rows[0])
+        const queryResults = (dbres.rows[0]);
         //if email and password match values in database for users.email and password then log in
-        if((dbres.rows[0].email === inputEmail) && (dbres.rows[0].password === inputPassword)) {
+        if ((dbres.rows[0].email === inputEmail) && (dbres.rows[0].password === inputPassword)) {
 
           const idToStore = dbres.rows[0].email;
           req.session.user_email = idToStore;
@@ -64,13 +64,5 @@ router.route('/',(req,res) => {
     res.render('login');
 
   });
-
-
-
-
-
-
-
-
 
 module.exports = router;
