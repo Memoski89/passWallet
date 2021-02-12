@@ -169,7 +169,7 @@ router.route('/deleteLogin/:user_name_for_site_login_ID')
 
 
 //get and post route to create new login
-router.route('/createNewLogin')
+router.route('/user/createNewLogin')
   .get((req,res) => {
     //
     const userEmail = req.session.user_email;
