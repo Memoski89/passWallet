@@ -1,6 +1,8 @@
+/* eslint-disable func-style */
 function myFunction(input) {
   /* Get the text field */
   let copyText = document.getElementById(input);
+
   /* Select the text field */
   copyText.select();
   copyText.setSelectionRange(0, 99999); /* For mobile devices */
@@ -11,3 +13,5 @@ function myFunction(input) {
   /* Alert the copied text */
   alert("Copied the password: " + copyText.value);
 }
+
+

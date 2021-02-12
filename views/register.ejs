@@ -12,6 +12,49 @@
     <link rel="stylesheet" href="/styles/registerpage.css" type="text/css" />
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/togglefooter.js"></script>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <title>Passwallet-Login</title>
+        <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+        <link
+          rel="stylesheet"
+          href="/vendor/normalize-4.1.1.css"
+          type="text/css"
+        />
+        <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+        <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+      </head>
+      <body>
+        <%- include('partials/_header') %>
+        <main>
+          <h3>Create Account</h3>
+          <form method="POST" action="/register">
+            <h4>Name</h4>
+            <input type="text" id="fname" name="fname" placeholder="First Name, Last Name"/><br />
+            <h4>Email Address</h4>
+            <input type="email" name="email" placeholder="Enter Email"/>
+            <h4>Organization</h4>
+            <input
+              type="url" id="organization" name="organization" placeholder="http://"/><br />
+            <h4 style="margin-top: 1em">Password</h4>
+            <div class = categoriesOfSites>
+            </div>
+            <div>
+              <input type="password" name="password" placeholder="Enter Password"/>
+            </div>
+            <input type="checkbox" id="admin" name="admin" value="true"/>
+              <label for="admin"> I am an adminstrator</label><br />
+              <div style="margin-top: 1em">
+              <button class="btn btn-primary" type="submit">Register</button>
+            </div>
+          </form>
+        </main>
+      </body>
+    </html>
   </head>
   <body>
     <%- include('partials/_header') %>
