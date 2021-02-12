@@ -23,7 +23,7 @@
         <%- include('partials/_loggedheader') %>
         <main>
           <h3>Create New Login</h3>
-          <form method="POST" action="/home/user/createNewLogin">
+          <form method="POST" action="/user/createNewLogin">
             <h4>Enter Username for this login:</h4>
             <input
               type="text"
@@ -33,9 +33,9 @@
             /><br />
             <h4>Enter password for this login:</h4>
             <input type="text" name="user_password_for_site_login" placeholder="Enter Password for this login" />
-          </div>
-          <div>OR GENEREATE A PASSWORD BELOW</div>
-          <div>
+            </div>
+            <div>OR GENEREATE A PASSWORD BELOW</div>
+            <div>
             <input type="checkbox" id="upper" name="upper" value="1"/>
             <label for="upper"> UperCase</label><br />
             <div style="margin-top: 1em">
@@ -51,11 +51,11 @@
             <input type="number" id="length" name="length" value=""/>
             <label for="length">Length Of Password</label><br />
             <div style="margin-top: 1em">
-          </div>
-          </div>
+            </div>
+           </div>
             <h4>Address/URL for login:</h4>
             <input type="text" id="url_for_login" name="url_for_login" placeholder="Login address"/>
-         <h2>Select Category </h2>
+           <h2>Select Category </h2>
            <label for="cars">Choose a category:</label>
            <select id="websiteCategories" name="websiteCategories">
              <option name = "entertainment" value=entertainment>entertainment</option>
