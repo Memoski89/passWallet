@@ -144,8 +144,8 @@ router.route('/editLogin/:user_name_for_site_login')
     db.query(
       queryString,values)
       .then(dbres => {
-
-        res.redirect("/home");
+        //needs to be fixed to redirect to category page
+        res.redirect(`/home/${dbres.rows}`);
 
       }).catch(e => res.send('redirect to page that says email/login incorrect',e));
 
@@ -175,13 +175,13 @@ router.route('/deleteLogin/:user_name_for_site_login_ID')
 
 
 //get and post route to create new login
-router.route('/createNewLogin')
+router.route('/user/createNewLogin')
   .get((req,res) => {
     //
-    console.log('hi, here in the createNewLogin GET route ');
+    //console.log('hi, here in the createNewLogin GET route ');
     const userEmail = req.session.user_email;
     let templateVars = { idToStore: userEmail};
-
+    //res.send('hi, here in the createNewLogin GET route ');
     res.render("createNewLogin",templateVars);
 
 
