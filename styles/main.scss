@@ -38,12 +38,25 @@ main {
     padding-right: 1em;
   }
 }
+.content{
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+.container-contents{
+padding-top: 2em;
+padding-bottom: 2em;
+}
+.sponsors{
+  padding-top: 2em;
+}
 .sponsors-logos {
   height: 100px;
   display: flex;
   align-items: center;
   background-color: white;
   justify-content: space-around;
+  padding-top: 2em;
+  padding-bottom: 2em;
   a {
     filter: grey;
     filter: grayscale(100%);
