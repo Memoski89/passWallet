@@ -23,74 +23,41 @@
     <%- include('partials/_loggedheader') %>
     <main class='mysavedata'>
       <h3>My Accounts</h3>
-      <table class="table">
+
         <%JSON.stringify(passwords) %>
 
-        <tr class="definitions">
-          <th>id</th>
-          <th>username</th>
-          <th>homepage/loginpage</th>
-          <th>password</th>
-        </tr>
-        <% for (const logins of passwords) { %>
-        <tr class="user-info">
-          <td><%= logins.id %></td>
-          <td><%= logins.user_name_for_site_login %></td>
-          <td><%= logins.url_for_login %></td>
-          <td>
-            <input type="text" class="invisible-text" value="<%= logins.user_password_for_site_login %>" id="input-<%=logins.id %>" />
-            <button class="copypass" onclick="myFunction(`input-<%=logins.id %>`)">Copy Pass</button>
-          </td>
-          <td>
-            <a href="home/editLogin/<%=logins.id%>">
-            <button class="edit">Edit</button>
-            </a>
-          </td>
-          <td>
-            <form method="POST" action="home/deleteLogin/<%=logins.id%>">
-             <button class="delete" type="submit">Delete</button>
-            </form>
-          </td>
-        </tr>
-        <% } %>
-        <table>
-          <tr>
+        <table class="table">
+          <tr class="definitions">
             <th>id</th>
             <th>username</th>
             <th>homepage/loginpage</th>
-            <th>password</th>
             <th>category</th>
+            <th>password</th>
           </tr>
           <% for (const logins of passwords) { %>
-          <tr>
+            <tr class="user-info">
             <td><%= logins.id %></td>
             <td><%= logins.user_name_for_site_login %></td>
             <td><%= logins.url_for_login %></td>
             <td><%= logins.category %></td>
 
             <td>
-              <input
-                type="text" class='invisible-text'
-                value="<%= logins.user_password_for_site_login %>"
-                id="input-<%=logins.id %>"
-              />
+              <input type="text" class='invisible-text' value="<%= logins.user_password_for_site_login %>" id="input-<%=logins.id %>"/>
               <button class = "copypass" onclick="myFunction(`input-<%=logins.id %>`)">Copy password</button>
             </td>
-
             <td>
               <a href="editLogin/<%=logins.id%>">
-                Edit
+                <button class="edit">Edit</button>
               </a>
             </td>
             <td>
-              <form method="POST" action="deleteLogin/<%=logins.id%>">
-                Delete
+              <form method="POST"  action="deleteLogin/<%=logins.id%>">
+                <button class="delete" type="submit">Delete</button>
               </form>
             </td>
           </tr>
           <% } %>
-        </table>
-        <tbody></tbody>
+
       </table>
     </main>
     <%- include('partials/_footer') %>

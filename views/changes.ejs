@@ -27,6 +27,37 @@
 <% } %>
 
 
+<!-- original my account page -->
+
+<table class="table">
+  <tr class="definitions">
+    <th>id</th>
+    <th>username</th>
+    <th>homepage/loginpage</th>
+    <th>password</th>
+  </tr>
+  <% for (const logins of passwords) { %>
+  <tr class="user-info">
+    <td><%= logins.id %></td>
+    <td><%= logins.user_name_for_site_login %></td>
+    <td><%= logins.url_for_login %></td>
+    <td>
+      <input type="text" class="invisible-text" value="<%= logins.user_password_for_site_login %>" id="input-<%=logins.id %>" />
+      <button class="copypass" onclick="myFunction(`input-<%=logins.id %>`)">Copy Pass</button>
+    </td>
+    <td>
+      <a href="home/editLogin/<%=logins.id%>">
+      <button class="edit">Edit</button>
+      </a>
+    </td>
+    <td>
+      <form method="POST" action="home/deleteLogin/<%=logins.id%>">
+       <button class="delete" type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  <% } %>
+</table>
 
 <!-- my accountejs -->
 <div class ='dyi'>

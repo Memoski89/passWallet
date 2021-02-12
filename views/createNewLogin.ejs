@@ -28,7 +28,7 @@
           </div>
           <div class="site-password"></div>
             <label for="user_password_for_site_login">Enter password for this login:</label>
-            <input type="text" name="user_password_for_site_login" placeholder="Enter Password for this login" required/><br/>
+            <input type="password" name="user_password_for_site_login" placeholder="Enter Password for this login"/><br/>
           </div>
           <p>OR GENEREATE A PASSWORD BELOW</p>
           <div class="checkboxes">
@@ -46,53 +46,17 @@
 
             <label for="url_for_login">Address/URL for login:</label>
             <input type="url" id="url_for_login" name="url_for_login" placeholder="Login address" value="https://" required/></br>
+            <h2>Select Category </h2>
+            <label for="cars">Choose a category:</label>
+            <select id="websiteCategories" name="websiteCategories">
+              <option name = "entertainment" value=entertainment>entertainment</option>
+              <option name = "sports" value=sports>sports</option>
+              <option name = "news" value=news>news</option>
+              <option name = "work" value=work>work</option>
+              <option name = "shopping" value=shopping>shopping</option>
+              <option name = "other" value=other>other</option>
+            </select></br>
             <button class="register" type="submit">Register</button>
-            <h4>Enter Username for this login:</h4>
-            <input
-              type="text"
-              id="user_name_for_site_login"
-              name="user_name_for_site_login"
-              placeholder="User Name for login"
-            /><br />
-            <h4>Enter password for this login:</h4>
-            <input type="text" name="user_password_for_site_login" placeholder="Enter Password for this login" />
-          </div>
-          <div>OR GENEREATE A PASSWORD BELOW</div>
-          <div>
-            <input type="checkbox" id="upper" name="upper" value="1"/>
-            <label for="upper"> UperCase</label><br />
-            <div style="margin-top: 1em">
-            <input type="checkbox" id="lower" name="lower" value="1"/>
-            <label for="lower">LowerCase</label><br />
-            <div style="margin-top: 1em">
-            <input type="checkbox" id="number" name="number" value="1"/>
-            <label for="number">Incl Numbers</label><br />
-            <div style="margin-top: 1em">
-            <input type="checkbox" id="symbol" name="symbol" value="1"/>
-            <label for="symbol">Incl Symbols</label><br />
-            <div style="margin-top: 1em">
-            <input type="number" id="length" name="length" value=""/>
-            <label for="length">Length Of Password</label><br />
-            <div style="margin-top: 1em">
-          </div>
-          </div>
-            <h4>Address/URL for login:</h4>
-            <input type="text" id="url_for_login" name="url_for_login" placeholder="Login address"/>
-         <h2>Select Category </h2>
-           <label for="cars">Choose a category:</label>
-           <select id="websiteCategories" name="websiteCategories">
-             <option name = "entertainment" value=entertainment>entertainment</option>
-             <option name = "sports" value=sports>sports</option>
-             <option name = "news" value=news>news</option>
-             <option name = "work" value=work>work</option>
-             <option name = "shopping" value=shopping>shopping</option>
-             <option name = "other" value=other>other</option>
-           </select>
-
-            <div style="margin-top: 1em">
-              <button class="btn btn-primary" type="submit">Register</button>
-            </div>
-          </form>
     </main>
     <%- include('partials/_footer') %>
   </body>
