@@ -1,7 +1,6 @@
-function myFunction() {
+function myFunction(input) {
   /* Get the text field */
-  var copyText = document.getElementById("myInput");
-
+  let copyText = document.getElementById(input);
   /* Select the text field */
   copyText.select();
   copyText.setSelectionRange(0, 99999); /* For mobile devices */

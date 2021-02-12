@@ -7,12 +7,13 @@
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
-        <a class="nav-item-my-passes" href="/home">My saved passwords</a>
-        <a class="nav-item-create" href="/home/createNewLogin">Save new password</a>
+        <a class="nav-item-my-passes" href="/home">My Saved Accounts</a>
+        <a class="nav-item-create" href="/home/createNewLogin">Save New Login</a>
       </div>
     </div>
     </div>
     <div class="to-the-right">
+      <a class="footer-toggle">About Us</a>
       <form class="form-inline" method="POST" action="/logout">
         <span class="navbar-text"> Logged in as:   <%= idToStore%></span>
         <button class="logout" type="submit">Logout</button>
