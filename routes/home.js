@@ -266,4 +266,15 @@ router.route('/createNewLogin')
 
 //   });
 
+
+
+
+// //get route for ADMIN to view their organizations saved passwords
+// router.route('/myOrganizationPasswords:id')
+//   .get((req,res) => {
+
+//     res.send("/home/myOrganizationPasswords:id");
+
+//   });
+
 module.exports = router;
