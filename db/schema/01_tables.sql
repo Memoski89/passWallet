@@ -18,8 +18,8 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   admin BOOLEAN DEFAULT FALSE,
-  UNIQUE (email),
-  organization_id INTEGER REFERENCES organization(id) ON DELETE CASCADE NOT NULL
+  UNIQUE (email)
+
 );
 
 --admins

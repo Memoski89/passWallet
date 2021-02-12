@@ -23,11 +23,11 @@ router.route('/',(req,res) => {
     //console.log(req.body.Organization, 'ORGANIZATIONS')
     let response = req.body;
     const queryString = `
-    INSERT INTO users (name,email, password, admin,orgnization_id)
-    VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO users (name,email, password, admin)
+    VALUES ($1, $2, $3, $4)
     RETURNING *;
     `;
-    const values = [response.fname, response.email,response.password, response.admin, response.Organization];
+    const values = [response.fname, response.email,response.password, response.admin];
 
     db.query(queryString,values)
       .then(dbres => {
