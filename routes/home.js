@@ -135,11 +135,13 @@ router.route('/editLogin/:user_name_for_site_login')
 
     let update_id = req.params.user_name_for_site_login;
 
+    const values = [req.body.updateLoginURL, req.body.updatePassword, update_id];
+
     const queryString = `UPDATE user_login_per_site SET url_for_login = $1, user_password_for_site_login = $2
     WHERE user_login_per_site.id = $3;`;
 
     db.query(
-      queryString,values)
+      queryString, values)
       .then(dbres => {
 
         res.redirect("/home");
@@ -171,11 +173,10 @@ router.route('/deleteLogin/:user_name_for_site_login_ID')
 //get and post route to create new login
 router.route('/user/createNewLogin')
   .get((req,res) => {
-    //
-    const userEmail = req.session.user_email;
-    let templateVars = { idToStore: userEmail};
-
-    res.render("createNewLogin",templateVars);
+   //console.log('hi, here in the createNewLogin GET route ');
+  const userEmail = req.session.user_email;
+  let templateVars = { idToStore: userEmail};
+  res.render("createNewLogin",templateVars);
 
 
   })

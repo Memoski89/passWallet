@@ -1,5 +1,6 @@
 .categories form {
   padding-bottom: 2em;
+<<<<<<< HEAD
  text-decoration: none;
  }
  .categories-links{
@@ -10,3 +11,15 @@
  .categories-links :hover{
   box-shadow: lightblue;
  }
+=======
+text-decoration: none;
+}
+.categories-links{
+  padding:2em;
+  text-decoration: none;
+  color: inherit;
+}
+.categories-links :hover{
+  box-shadow: lightblue;
+}
+>>>>>>> 4d7d8030f04f15ea3b047572315cd56eaf24de26

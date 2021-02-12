@@ -8,24 +8,31 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/loginpage.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Slab:wght@900&display=swap" rel="stylesheet">
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/togglefooter.js"></script>
   </head>
   <body>
     <%- include('partials/_header') %>
-    <main>
-        <h3>Login</h3>
-      <h4>Email Address</h4>
-
+    <main class = 'login'>
+      <h3>Login</h3>
       <form method="POST" action="/login">
-        <input type="email" name="email" placeholder="Enter Email" />
-        <h4 style="margin-top: 1em">Password</h4>
-        <div>
-          <input type="password" name="password" placeholder="Enter password" />
-        </div>
-        <div style="margin-top: 1em">
-          <button class="btn btn-primary" type="submit">Login</button>
+        <div class="login-email">
+        <label for="email"> Email</label><br/>
+        <input type="email" name="email" placeholder="Enter Email" required/><br/>
+      </div>
+      <div class="login-password">
+        <label for="password">Password</label><br/>
+        <input type="password" name="password" placeholder="Enter password" required/><br/>
+      </div>
+        <div class="login-button">
+        <button class="btn btn-primary" type="submit">Login</button>
         </div>
       </form>
-      </main>
+    </main>
+  <%- include('partials/_footer') %>
+
   </body>
 </html>

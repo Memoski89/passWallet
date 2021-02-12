@@ -14,58 +14,60 @@
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <link rel="stylesheet" href="/styles/myaccount.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Slab:wght@900&display=swap" rel="stylesheet">
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script
-      type="text/javascript"
-      src="/scripts/copytoclipboard.js"></script>
+    <script type="text/javascript" src="/scripts/togglefooter.js"></script>
+    <script type="text/javascript" src="/scripts/copytoclipboard.js"></script>
   </head>
   <body>
     <%- include('partials/_loggedheader') %>
-    <main>
+    <main class='mysavedata'>
       <h3>My Accounts</h3>
-      <table class="table">
+
         <%JSON.stringify(passwords) %>
-        <table>
-          <tr>
+
+        <table class="table">
+          <tr class="definitions">
             <th>id</th>
             <th>username</th>
             <th>homepage/loginpage</th>
-            <th>password</th>
             <th>category</th>
+            <th>password</th>
           </tr>
           <% for (const logins of passwords) { %>
-          <tr>
+            <tr class="user-info">
             <td><%= logins.id %></td>
             <td><%= logins.user_name_for_site_login %></td>
             <td><%= logins.url_for_login %></td>
             <td><%= logins.category %></td>
 
             <td>
-              <input
-                type="text" class='invisible-text'
-                value="<%= logins.user_password_for_site_login %>"
-                id="input-<%=logins.id %>"
-              />
+              <input type="text" class='invisible-text' value="<%= logins.user_password_for_site_login %>" id="input-<%=logins.id %>"/>
               <button class = "copypass" onclick="myFunction(`input-<%=logins.id %>`)">Copy password</button>
             </td>
-
             <td>
               <a href="editLogin/<%=logins.id%>">
-                Edit
+                <button class="edit">Edit</button>
               </a>
             </td>
             <td>
+<<<<<<< HEAD
               <form method="POST" action="/home/deleteLogin/<%=logins.id%>">
                 <button type="submit">
                   Delete
                 </button>
+=======
+              <form method="POST"  action="deleteLogin/<%=logins.id%>">
+                <button class="delete" type="submit">Delete</button>
+>>>>>>> 4d7d8030f04f15ea3b047572315cd56eaf24de26
               </form>
             </td>
           </tr>
           <% } %>
-        </table>
-        <tbody></tbody>
+
       </table>
     </main>
+    <%- include('partials/_footer') %>
   </body>
 </html>

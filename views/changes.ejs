@@ -1,0 +1,101 @@
+<tr class="definitions">
+  <th>id</th>
+  <th>username</th>
+  <th>homepage/loginpage</th>
+  <th>password</th>
+</tr>
+<% for (const logins of passwords) { %>
+<tr class="user-info">
+  <td><%= logins.id %></td>
+  <td><%= logins.user_name_for_site_login %></td>
+  <td><%= logins.url_for_login %></td>
+  <td>
+    <input type="text" class="invisible-text" value="<%= logins.user_password_for_site_login %>" id="input-<%=logins.id %>" />
+    <button class="copypass" onclick="myFunction(`input-<%=logins.id %>`)">Copy Pass</button>
+  </td>
+  <td>
+    <a href="home/editLogin/<%=logins.id%>">
+    <button class="edit">Edit</button>
+    </a>
+  </td>
+  <td>
+    <form method="POST" action="home/deleteLogin/<%=logins.id%>">
+     <button class="delete" type="submit">Delete</button>
+    </form>
+  </td>
+</tr>
+<% } %>
+
+
+<!-- original my account page -->
+
+<table class="table">
+  <tr class="definitions">
+    <th>id</th>
+    <th>username</th>
+    <th>homepage/loginpage</th>
+    <th>password</th>
+  </tr>
+  <% for (const logins of passwords) { %>
+  <tr class="user-info">
+    <td><%= logins.id %></td>
+    <td><%= logins.user_name_for_site_login %></td>
+    <td><%= logins.url_for_login %></td>
+    <td>
+      <input type="text" class="invisible-text" value="<%= logins.user_password_for_site_login %>" id="input-<%=logins.id %>" />
+      <button class="copypass" onclick="myFunction(`input-<%=logins.id %>`)">Copy Pass</button>
+    </td>
+    <td>
+      <a href="home/editLogin/<%=logins.id%>">
+      <button class="edit">Edit</button>
+      </a>
+    </td>
+    <td>
+      <form method="POST" action="home/deleteLogin/<%=logins.id%>">
+       <button class="delete" type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  <% } %>
+</table>
+
+<!-- my accountejs -->
+<div class ='dyi'>
+  <div class="site-username">
+<label for="user_name_for_site_login"> Enter Username for this login:</label>
+<input type="text" id="user_name_for_site_login" name="user_name_for_site_login" placeholder="User Name for login"
+required/><br/>
+</div>
+<div class="site-password"></div>
+<label for="user_password_for_site_login">Enter password for this login:</label>
+<input type="text" name="user_password_for_site_login" placeholder="Enter Password for this login" required/><br/>
+</div>
+<p>OR GENEREATE A PASSWORD BELOW</p>
+<div class="checkboxes">
+<label for="upper"> UpperCase ?</label>
+<input type="checkbox" id="upper" name="upper" value="1"/>
+<label for="lower">Lowercase ?</label>
+<input type="checkbox" id="lower" name="lower" value="1"/>
+<label for="number">include Numbers ?</label>
+<input type="checkbox" id="number" name="number" value="1"/>
+<label for="symbol">Include Symbols ?</label>
+<input type="checkbox" id="symbol" name="symbol" value="1"/>
+<label for="length">Length Of Password</label>
+<input type="number" id="length" name="length" value=""/>
+</div>
+
+<label for="url_for_login">Address/URL for login:</label>
+<input type="url" id="url_for_login" name="url_for_login" placeholder="Login address" value="https://" required/></br>
+<button class="register" type="submit">Register</button>
+
+<!-- register -->
+<title>Passwallet-Login</title>
+<link rel="stylesheet" href="/styles/header.css" type="text/css" />
+<link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+<link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+<link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<link rel="stylesheet" href="/styles/main.css" type="text/css" />
+<link rel="stylesheet" href="/styles/footer.css" type="text/css" />
+<link rel="stylesheet" href="/styles/registerpage.css" type="text/css" />
+<script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+<script type="text/javascript" src="/scripts/togglefooter.js"></script>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // See: https://sass-lang.com/
 body {
   background-color: #eee;
@@ -26,3 +27,18 @@ body {
  .login-button{
   padding-bottom: 2em;
  }
+=======
+.login{
+  display: block;
+}
+.login-password{
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+.login label{
+  padding-bottom: 1em;
+}
+.login-button{
+  padding-bottom: 2em;
+}
+>>>>>>> 4d7d8030f04f15ea3b047572315cd56eaf24de26

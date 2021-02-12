@@ -2,43 +2,37 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
     />
-    <title>Passwallet- myaccount</title>
+    <title>Passwallet- categories</title>
     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <link rel="stylesheet" href="/styles/myaccount.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/showcategories.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Slab:wght@900&display=swap" rel="stylesheet">
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script
-      type="text/javascript"
-      src="/scripts/copytoclipboard.js"></script>
+    <script type="text/javascript" src="/scripts/togglefooter.js"></script>
+    <script type="text/javascript" src="/scripts/copytoclipboard.js"></script>
   </head>
   <body>
     <%- include('partials/_loggedheader') %>
-    <main>
+    <main class="categories">
       <h3>My Login Categories</h3>
       <form method="GET" action="/home/:category">
-      <table class="table">
-        <%JSON.stringify(categories) %>
-        <table>
-          <% for (const x in categories) { %>
-          <tr>
-              <td>
-                <a href= "home/<%= categories[x].category %>">
-                <%= categories[x].category %> </a>
-              </td>
-          </tr>
-          <% } %>
-        </table>
-      </table>
-    </form>
+        <%JSON.stringify(categories) %> <% for (const x in categories) { %>
+        <a class="categories-links "href="home/<%= categories[x].category %>">
+          <%= categories[x].category %>
+        </a>
+      </br>
+     <% } %>
+      </form>
     </main>
+    <%- include('partials/_footer') %>
   </body>
 </html>
-
