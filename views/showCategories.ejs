@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <link rel="stylesheet" href="/styles/myaccount.css" type="text/css" />
     <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/showcategories.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Slab:wght@900&display=swap" rel="stylesheet">
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/togglefooter.js"></script>
     <script type="text/javascript" src="/scripts/copytoclipboard.js"></script>
@@ -24,7 +26,7 @@
       <h3>My Login Categories</h3>
       <form method="GET" action="/home/:category">
         <%JSON.stringify(categories) %> <% for (const x in categories) { %>
-        <a href="home/<%= categories[x].category %>">
+        <a class="categories-links "href="home/<%= categories[x].category %>">
           <%= categories[x].category %>
         </a>
       </br>
