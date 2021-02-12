@@ -31,12 +31,15 @@
             <th>username</th>
             <th>homepage/loginpage</th>
             <th>password</th>
+            <th>category</th>
           </tr>
           <% for (const logins of passwords) { %>
           <tr>
             <td><%= logins.id %></td>
             <td><%= logins.user_name_for_site_login %></td>
             <td><%= logins.url_for_login %></td>
+            <td><%= logins.category %></td>
+
             <td>
               <input
                 type="text" class='invisible-text'
@@ -47,14 +50,12 @@
             </td>
 
             <td>
-              <a href="home/editLogin/<%=logins.id%>">
-                <button class="edit" type="submit">
+              <a href="editLogin/<%=logins.id%>">
                   Edit
-                </button>
               </a>
             </td>
             <td>
-              <form method="POST" action="home/deleteLogin/<%=logins.id%>">
+              <form method="POST" action="deleteLogin/<%=logins.id%>">
                 <button class="delete" type="submit">
                   Delete
                 </button>

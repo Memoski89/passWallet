@@ -54,24 +54,6 @@ router.route('/')
 
         res.render('showCategories', templateVars);
 
-      }).then(dbres => {
-        //console.log(dbres); //works, retuns query results
-        //res.json(dbres.rows[0].password);
-        const queryResults = dbres.rows;
-        let templateVars;
-        if (userEmail) {
-          templateVars =
-          { passwords: queryResults,
-            idToStore: userEmail
-          };
-        } else {
-          templateVars =
-          { passwords: queryResults,
-            idToStore: null
-          };
-        }
-
-        res.render("myaccount",templateVars);
       })
       .catch(e => console.log('ERROR LINE 76',e));
 
@@ -92,21 +74,36 @@ router.route('/:category')
     const returnFromQuery = (queryParams) => (db.query(`SELECT * FROM user_login_per_site WHERE user_id = $1 AND category = $2;`, queryParams));
 
     db.query(findUSerString, userEmailCookie)
+
       .then((dbres)=>{
 
         const userID = dbres.rows[0].id;
 
         const queryParams = [userID, categoryForQuery];
 
-        returnFromQuery(queryParams).then((data)=>{
+        returnFromQuery(queryParams).then(dbres => {
 
-          console.log('DATA:', data);
+          console.log('DBRESSS.ROWS: ', dbres.rows);
+          const queryResults = dbres.rows;
+
+          let templateVars;
+          if (userEmail) {
+            templateVars =
+            { passwords: queryResults,
+              idToStore: userEmail
+            };
+          } else {
+            templateVars =
+            { passwords: queryResults,
+              idToStore: null
+            };
+          }
+
+          res.render("myaccount",templateVars);
 
         }).catch(e => console.log('ERROR FROM RETURN categories',e));
 
       }).catch(e => console.log('ERROR RETURN FROM GET USER ID QUERY',e));
-
-    res.send('error 126');
 
   });
 
@@ -123,8 +120,7 @@ router.route('/editLogin/:user_name_for_site_login')
     db.query(
       `SELECT * FROM user_login_per_site WHERE id = $1;`,paramsForQuery)
       .then(dbres => {
-        //console.log(dbres); //works, retuns query results
-        //res.json(dbres.rows[0].password);
+
         const queryResults = dbres.rows;
         let templateVars =
         { passwords: queryResults,
@@ -139,10 +135,6 @@ router.route('/editLogin/:user_name_for_site_login')
 
     let update_id = req.params.user_name_for_site_login;
 
-
-    // const values = [req.body.updateLoginURL, req.body.updatePassword, update_id];
-    // console.log(values);
-    // //const values = [response., response., response.,update_id];
     const queryString = `UPDATE user_login_per_site SET url_for_login = $1, user_password_for_site_login = $2
     WHERE user_login_per_site.id = $3;`;
 
@@ -253,8 +245,17 @@ router.route('/createNewLogin')
 
       }).catch(e => res.send('redirect to page that says email/login incorrect',e));
 
-  });
+});
 
+
+
+// //get route for ADMIN to view their organizations saved passwords
+// router.route('/myOrganizationPasswords:id')
+//   .get((req,res) => {
+
+//     res.send("/home/myOrganizationPasswords:id");
+
+//   });
 
 
 // //get route for ADMIN to view their organizations saved passwords
