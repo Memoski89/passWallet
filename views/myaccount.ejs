@@ -24,39 +24,49 @@
     <main>
       <h3>My Accounts</h3>
       <table class="table">
+        <!-- <thead>
+          <tr>
+            <th scope="col">Organization</th>
+            <th scope="col">password</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead> -->
         <%JSON.stringify(passwords) %>
+
         <table>
           <tr>
             <th>id</th>
             <th>username</th>
             <th>homepage/loginpage</th>
             <th>password</th>
-            <th>category</th>
           </tr>
           <% for (const logins of passwords) { %>
           <tr>
             <td><%= logins.id %></td>
             <td><%= logins.user_name_for_site_login %></td>
             <td><%= logins.url_for_login %></td>
-            <td><%= logins.category %></td>
-
             <td>
               <input
                 type="text" class='invisible-text'
                 value="<%= logins.user_password_for_site_login %>"
-                id="input-<%=logins.id %>"
+                id="myInput"
               />
-              <button class = "copypass" onclick="myFunction(`input-<%=logins.id %>`)">Copy password</button>
+              <button class = "copypass" onclick="myFunction()">Copy password</button>
             </td>
 
             <td>
-              <a href="editLogin/<%=logins.id%>">
-                Edit
+              <a href="home/editLogin/<%=logins.id%>">
+                <button class="edit" type="submit">
+                  Edit
+                </button>
               </a>
             </td>
             <td>
               <form method="POST" action="deleteLogin/<%=logins.id%>">
-                Delete
+                <button class="delete" type="submit">
+                  Delete
+                </button>
               </form>
             </td>
           </tr>
