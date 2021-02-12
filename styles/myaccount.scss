@@ -1,6 +1,7 @@
 .table {
   display: flex;
   justify-content: space-around;
+  border-spacing: 20px;
 }
 .invisible-text {
   opacity: 0;
@@ -15,7 +16,7 @@
 .delete {
   background-color: red;
 }
-
-.to-the-right {
-  font-size: 10px;
+.user-info{
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

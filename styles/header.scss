@@ -11,6 +11,7 @@ header {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 2;
 
   nav {
     display: flex;
@@ -86,4 +87,7 @@ header {
 .logout{
   padding-left: 10px;
   padding-right: 10px;
+}
+.footer-toggle{
+  padding-right: 20px;
 }
